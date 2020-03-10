@@ -18,6 +18,9 @@ namespace filemen
         {
             InitializeComponent();
             this.KeyDown += new KeyEventHandler(metroTextBox1_KeyDown);
+            notifyIcon1.Icon = SystemIcons.Asterisk;
+            this.ShowInTaskbar = false;
+            notifyIcon1.MouseClick += notifyIcon1_MouseClick;
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -86,6 +89,26 @@ namespace filemen
                 metroTextBox1.Text = "";
                 showdirs();
             }
+        }
+
+        private void notifyIcon1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                this.WindowState = FormWindowState.Normal;
+                this.Show();
+            }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
         }
     }
 }
